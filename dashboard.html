@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"></script> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-B/GM4XqrwHnWXNOWMbloTmrYXZg10cakYGmpfsR/bbzQ6JAJI4ihuyADKLnBgrCe" crossorigin="anonymous">
+    <script type="module" src="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-1a/pXj49ZQ1aHEmrJ+gMw1otqoVsYwlEnlD8mIfY2TV03r20Y0CN7uqx1tQogjPL"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" />
+</head>
+
+
+
+
+
+
+
+
+<body>
+    <header class="flex items-center justify-center bg-blue-700">
+        <section class="grid grid-cols-[1fr_4fr_1fr] h-[110px]  items-center  w-[95%]">
+            <div class="flex h-[60%] justify-center gap-[10px]">
+                <div
+                    class="rounded-2xl text-blue-600 h-[100%] w-[30%] bg-amber-50 flex justify-center items-center border border-solid border-blue-900">
+                    <i class="ph ph-sparkle text-6xl"></i>
+                </div>
+                <div class="text-amber-50 w-[60%] text-5xl">NOVA</div>
+            </div>
+            <div class="h-[60%] bg-amber-50 grid grid-cols-[1fr_15fr_4fr] place-items-center rounded-xl">
+                <div><i class="ph ph-magnifying-glass"></i></div>
+                <input type="text" class="w-[100%]" value="search for something extraordinary....">
+                <button class="text-amber-50 h-[80%] w-[90%] bg-amber-700 rounded-xl text-2xl">Search</button>
+            </div>
+            <div class="flex h-[60%] gap-[30px]">
+                <button
+                    class="text-amber-50  flex justify-center items-center bg-purple-500 backdrop-blur  h-[100%] w-[25%] rounded-xl  border border-solid border-blue-900 "><i
+                        class="ph ph-heart text-3xl"></i></button>
+                <div
+                    class="flex  items-center justify-around text-amber-50   bg-purple-500 backdrop-blur  h-[100%] w-[60%] rounded-xl  border border-solid border-blue-900">
+                    <div class="text-amber-50"><i class="bi bi-bag-dash text-2xl"></i></div>
+                    <div class="text-amber-50 text-3xl">Cart</div>
+                    <div
+                        class="text-blue-600 text-x2l bg-amber-50 rounded-xl w-[25%] h-[60%] flex justify-center items-center">
+                        0</div>
+                </div>
+            </div>
+        </section>
+    </header>
+    <main class="flex items-center justify-center bg-gray-100">
+        <section class="w-[95%]">
+            <div>
+                <div>
+                    <br>
+                    <span class="font-bold text-5xl text-red-600">-</span>
+                    <span class="font-bold text-2xl text-blue-600">The colorful collection</span>
+                </div>
+                <h1 class="font-bold text-5xl">Find your next <span class="relative inline-block">
+
+                        <span class="text-purple-600 font-bold text-5xl">favorite.</span>
+
+
+                        <svg class="absolute right-5 -bottom-3 w-full h-3" viewBox="0 0 100 12" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2 9.5C35 3.5 70 3.5 98 8.5" stroke="#FF4747" stroke-width="3"
+                                stroke-linecap="round" />
+                        </svg>
+
+                    </span>
+                </h1>
+                <br>
+                <p class="text-zinc-500 text-2xl">Fresh finds, bold design, and everyday essentials—picked to brighten
+                    your world.</p>
+                <br>
+            </div>
+
+            <div
+                class="grid grid-cols-[4fr_2fr] w-[100%] h-[80px] bg-amber-50  rounded-xl transition-shadow drop-shadow-blue-900 shadow-xl">
+                <div class="flex gap-[20px] items-center">
+                    <div class="w-[0%]"></div>
+                    <button class="text-amber-50 text-xl bg-blue-500 h-[60%] rounded-xl border border-blue-900 p-2"><i
+                            class="ph ph-squares-four"></i> <span>All products</span></button>
+                    <button class=" text-xl h-[60%] rounded-xl p-2">Audio</button>
+                </div>
+                <div class="flex items-center gap-[20px]">
+                    <div
+                        class="h-[80%] w-[25%] border border-solid border-blue-900 rounded-xl flex flex-col justify-center items-center">
+                        <h1>Sort By</h1>
+                        <select id="sort">
+                            <option value="hhhhhhhhhh">hhhhhhhhhh</option>
+                        </select>
+                    </div>
+
+                    <div
+                        class="h-[80%] w-[25%] border border-solid border-blue-900 rounded-xl flex flex-col justify-center items-center">
+                        <h1>Max Price</h1>
+                        <select id="max-Prix">
+                            <option value=""></option>
+                        </select>
+                    </div>
+
+                    <div class="flex items-center gap-[15px]">
+                        <div class="relative inline-block w-11 h-5">
+                            <input checked id="switch-component-blue" type="checkbox"
+                                class="peer appearance-none w-11 h-5 bg-slate-100 rounded-full checked:bg-blue-600 cursor-pointer transition-colors duration-300" />
+                            <label for="switch-component-blue"
+                                class="absolute top-0 left-0 w-5 h-5 bg-white rounded-full border border-slate-300 shadow-sm transition-transform duration-300 peer-checked:translate-x-6 peer-checked:border-blue-600 cursor-pointer">
+                            </label>
+                        </div>
+                        <div class="text-xl">In stock only</div>
+                    </div>
+                </div>
+
+            </div>
+            <br><br>
+            <div class="h-[20px] w-[100%] flex items-center justify-between">
+                <h1 class="font-bold text-2xl flex items-center gap-[10px]">8 <span
+                        class="text-zinc-500 text-sm ">curated products</span></h1>
+                <div class="flex gap-[20px] items-center">
+                    <div
+                        class="h-[10px] w-[10px] rounded-[50%] bg-green-700 shadow-3xl transition-shadow drop-shadow-green-900 duration-300">
+                    </div>
+                    <p>Free shipping on orders over $100</p>
+                </div>
+            </div>
+            <br><br>
+            <div id="cartesContainer" class="flex gap-[15px] flex-wrap ">
+
+
+                <div class=" h-[500px] w-[24%] bg-amber-50 rounded-3xl flex flex-col items-center gap-[10px]">
+                    <div class="h-[0%]"></div>
+                    <div class="relative w-[90%] h-[60%] bg-blue-700 rounded-2xl ">
+                        <img src="" alt="" class="absolute w-[100%] h-[100%] bg-blue-700 rounded-2xl">
+                        <div class="absolute flex gap-[140px] mt-4 ml-4">
+                            <span class=" h-[40px] bg-gray-100 border border-blue-900 rounded-xl flex justify-center items-center p-4">HHHHHH</span>
+                            <div class=" w-[50px] h-[50px] rounded-xl =">
+                                <button class=" w-[100%] h-[100%] bg-amber-50 rounded-xl border border-blue-900 flex
+                                items-center justify-center "><i class="ph ph-heart text-3xl "></i></button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="flex h-[30px] w-[80%] items-center justify-between">
+                        <div class="h-[30px] p-4 bg bg-gray-100 flex justify-center items-center rounded-xl text-blue-900" >audio</div>
+                        <p class="text-amber-400 font-bold"><i class="ph-fill ph-star"></i> 4.9 <span class="text-zinc-500 font-semibold">(128)</span></p>
+                    </div>
+                    <br>
+                    <h1 class="w-[80%] font-semibold text-xl">Pulse Studio Headphones</h1>
+                    <div class="w-[80%] flex items-center justify-between">
+                        <div class="text-xl text-blue-900 ">900 $</div>
+                        <button class="h-[40px] w-[110px] bg-black text-amber-50 rounded-xl text-[20px] flex justify-center items-center">Add to <i class="bi bi-bag-dash text-2xl"></i></button>
+                    </div>
+
+                    <div class="h-[0%]"></div>
+                </div>
+
+
+
+
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
