@@ -18,8 +18,11 @@ async function bringData() {
     const products = await response.json();
     console.log(products);
     creat_cartes(products);
-    PriceFilter(products)
-    
+    PriceSort(products);
+    PriceFilter(products);
+    choseByCategorie(products);
+    search_input(products);
+
 }
 // const newProduct = bringData();
 // creat_cartes(newProduct)
@@ -98,6 +101,7 @@ function add_Categories(categ) {
 };
 
 
+
 // functions sort par prix 
 let sortrPrix = document.getElementById("sortrPrix");
 let filterPrix = document.getElementById("filterPrix");
@@ -158,8 +162,6 @@ function PriceFilter(products) {
 
 //     })
 // }
-
-
 
 
 let All_products = document.getElementById("All-products")
@@ -261,6 +263,7 @@ async function PriceSort(products) {
 }
 
 
+
 // search par titre using fetch 
 let searchinput = document.getElementById("searchInput");
 console.log(searchinput);
@@ -326,13 +329,6 @@ async function filterParStock() {
 
 }
 filterParStock()
-
-
-
-
-
-
-
 
 
 
