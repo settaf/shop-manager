@@ -58,3 +58,41 @@ function creat_cartes(products) {
     });
 }
 
+
+
+// this is just for display categorie names
+fetch("http://localhost:3000/api/categories")
+    .then(response => {
+        console.log(response.status);
+        return response;
+    })
+    .then(response => {
+        if (!response.ok) {
+            return response.json().then(problem => {
+                throw new Error(problem.message);
+            });
+        }
+
+        return response;
+    })
+    .then(response => {
+        const categ = response.json();
+        return categ
+
+    })
+    .then(categ => {
+        console.log(categ)
+        add_Categories(categ);
+    })
+    .catch(err => console.error(err));
+
+
+
+
+function add_Categories(categ) {
+    categ.forEach(item => {
+        catigoriesContainer.innerHTML += `<button class=" text-xl h-[60%] rounded-xl p-2" data-id="${item.id}">${item.name}</button>`
+    })
+
+};
+
