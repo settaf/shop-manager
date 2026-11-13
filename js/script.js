@@ -261,3 +261,31 @@ async function PriceSort(products) {
 }
 
 
+// search par titre using fetch 
+let searchinput = document.getElementById("searchInput");
+console.log(searchinput);
+let buttonSearch = document.getElementById("buttonSearch");
+console.log(buttonSearch);
+
+async function search_input(products) {
+    buttonSearch.addEventListener('click', async () => {
+        if (searchinput.value.trim().length == 0) {
+            console.log(searchinput.value.trim().length);
+            cartContainer.innerHTML = "";
+            creat_cartes(products);
+        }
+        else {
+            const data = await fetch(apiProducts + `?search=${searchinput.value}`);
+            if (!data.ok) {
+                const probleme = await data.json();
+                console.log(probleme.message);
+            }
+            const product = await data.json();
+            console.log(product)
+            cartContainer.innerHTML = "";
+            creat_cartes(product);
+        }
+        searchinput.value = "";
+    })
+
+}
