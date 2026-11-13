@@ -18,6 +18,7 @@ async function bringData() {
     const products = await response.json();
     console.log(products);
     creat_cartes(products);
+    PriceFilter(products)
     
 }
 // const newProduct = bringData();
@@ -96,3 +97,64 @@ function add_Categories(categ) {
 
 };
 
+
+// functions sort par prix 
+let sortrPrix = document.getElementById("sortrPrix");
+let filterPrix = document.getElementById("filterPrix");
+
+function PriceFilter(products) {
+    sortrPrix.addEventListener('change', () => {
+        if (sortrPrix.value == "Default") creat_cartes(products);
+        if (sortrPrix.value == "price:low to high") {
+            cartContainer.innerHTML = "";
+            let tab = products.sort((a, b) => a.price - b.price);
+            creat_cartes(tab);
+
+        }
+        if (sortrPrix.value == "price:high to low") {
+            cartContainer.innerHTML = "";
+            let tab = products.sort((a, b) => b.price - a.price);
+            creat_cartes(tab);
+
+        }
+    })
+}
+
+//filter par maxprice manuellement pas d'usage de fetch
+
+
+// function PriceSort(products) {
+//     filterPrix.addEventListener('change', () => {
+//         let tab = [];
+//         if (filterPrix.value == "Default") {
+//              cartContainer.innerHTML = "";
+//              creat_cartes(products);
+//         }
+//         if (filterPrix.value == "10") {
+//             cartContainer.innerHTML = "";
+//             products.forEach((item) => {
+//                 if (item.price <= 10) { tab.push(item); }
+
+//             })
+//             console.log(tab);
+//             creat_cartes(tab)
+//         }
+//         if (filterPrix.value == "20") {
+//             cartContainer.innerHTML = "";
+//             products.forEach((item) => {
+//                 if (item.price <= 20) { tab.push(item); }
+
+//             })
+//             creat_cartes(tab)
+//         }
+//         if (filterPrix.value == "35") {
+//             cartContainer.innerHTML = "";
+//             products.forEach((item) => {
+//                 if (item.price <= 35) { tab.push(item); }
+
+//             })
+//             creat_cartes(tab)
+//         }
+
+//     })
+// }
