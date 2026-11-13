@@ -158,3 +158,75 @@ function PriceFilter(products) {
 
 //     })
 // }
+
+
+
+
+let All_products = document.getElementById("All-products")
+// filter par categories manuellement pas d'usage de fetch
+
+
+// function choseByCategorie(products) {
+//     catigoriesContainer.addEventListener('click', (event) => {
+//         const btn = event.target;
+
+//         let tab = [];
+//         console.log(btn.tagName);
+//         console.log(btn)
+
+
+//         if (btn.tagName == "BUTTON") {
+//             if (btn.dataset.id != "AllProducts") {
+//                 console.log(btn.dataset.id);
+
+//                 cartContainer.innerHTML = "";
+//                 products.forEach((item) => {
+//                     if (item.categoryName == btn.textContent) {
+//                         tab.push(item);
+//                     }
+//                 })
+//                 creat_cartes(tab);
+//             }
+//             else{
+//                 cartContainer.innerHTML = "";
+//                 console.log(products)
+//                 creat_cartes(products);
+//             }
+//         }
+
+//     })
+// }
+
+// filter par categories  avec usage de fetch
+
+let apiProducts = "http://localhost:3000/api/products";
+
+
+async function choseByCategorie(products) {
+    catigoriesContainer.addEventListener('click', async (event) => {
+        const btn = event.target;
+
+        if (btn.tagName == "BUTTON") {
+            if (btn.dataset.id != "AllProducts") {
+                console.log(btn.dataset.id);
+
+                const data = await fetch(apiProducts + `?categoryId=${btn.dataset.id}`);
+                if (!data.ok) {
+                    const problem = await data.json();
+                    console.log(problem.message);
+                    return;
+                }
+                const products = await data.json();
+                cartContainer.innerHTML = "";
+                creat_cartes(products);
+
+            }
+            else {
+                cartContainer.innerHTML = "";
+                console.log(products)
+                creat_cartes(products);
+            }
+        }
+
+    })
+}
