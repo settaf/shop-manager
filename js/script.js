@@ -289,3 +289,51 @@ async function search_input(products) {
     })
 
 }
+
+
+//in stock using fetch
+
+const toggleSwitch = document.getElementById('switch-component-blue');
+async function filterParStock() {
+    toggleSwitch.addEventListener('change',async (e)=> {
+        const isChecked = e.target.checked;
+        console.log(isChecked);
+        if(isChecked){
+            const data = await fetch(apiProducts + `?inStock=true`);
+            if (!data.ok) {
+                const probleme = await data.json();
+                console.log(probleme.message);
+            }
+            const product = await data.json();
+            console.log(product)
+            cartContainer.innerHTML = "";
+            creat_cartes(product);
+        }
+        else{
+           const data = await fetch(apiProducts + `?inStock=false`);
+            if (!data.ok) {
+                const probleme = await data.json();
+                console.log(probleme.message);
+            }
+            const product = await data.json();
+            console.log(product)
+            cartContainer.innerHTML = "";
+            creat_cartes(product); 
+        }
+
+
+    })
+
+}
+filterParStock()
+
+
+
+
+
+
+
+
+
+
+
