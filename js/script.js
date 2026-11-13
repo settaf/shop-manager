@@ -230,3 +230,34 @@ async function choseByCategorie(products) {
 
     })
 }
+
+
+//filter par maxprice using de fetch
+
+
+
+async function PriceSort(products) {
+    filterPrix.addEventListener('change', async () => {
+
+
+        if (filterPrix.value == "Default") {
+            cartContainer.innerHTML = "";
+            creat_cartes(products);
+        }
+        else {
+            cartContainer.innerHTML = "";
+            const data = await fetch(apiProducts + `?maxPrice=${filterPrix.value}`)
+            if (!data.ok) {
+                const problem = await data.json();
+                console.log(problem.message);
+            }
+            const product = await data.json();
+            creat_cartes(product);
+
+        }
+
+
+    })
+}
+
+
