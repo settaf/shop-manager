@@ -1,4 +1,5 @@
-//
+
+
 let cartContainer = document.getElementById("cartesContainer");
 let catigoriesContainer = document.getElementById("catigoriesContainer")
 console.log(cartContainer)
@@ -32,7 +33,7 @@ bringData();
 
 function creat_cartes(products) {
     products.forEach(item => {
-        cartContainer.innerHTML += `<div class=" h-[500px] w-[24%] bg-amber-50 rounded-3xl flex flex-col items-center gap-[10px]">
+        cartContainer.innerHTML += `<div class=" h-[500px] w-[24%] bg-amber-50 rounded-3xl flex flex-col items-center gap-[10px] " >
                         <div class="h-[0%]"></div>
                         <div class="relative w-[90%] h-[60%] bg-blue-700 rounded-2xl ">
                             <img src=http://localhost:3000/${item.image} alt="" class="absolute w-[100%] h-[100%] bg-blue-700 rounded-2xl">
@@ -40,7 +41,7 @@ function creat_cartes(products) {
                                 <span class=" h-[40px] bg-gray-100 border border-blue-900 rounded-xl flex justify-center items-center p-4">HHHHHH</span>
                                 <div class=" w-[50px] h-[50px] rounded-xl =">
                                     <button class=" w-[100%] h-[100%] bg-amber-50 rounded-xl border border-blue-900 flex
-                                    items-center justify-center "><i class="ph ph-heart text-3xl "></i></button>
+                                    items-center justify-center hover:bg-pink-700 hover:text-amber-50"><i class="ph ph-heart text-3xl "></i></button>
                                 </div>
                             </div>
 
@@ -53,7 +54,10 @@ function creat_cartes(products) {
                         <h1 class="w-[80%] font-semibold text-xl">${item.name}</h1>
                         <div class="w-[80%] flex items-center justify-between">
                             <div class="text-xl text-blue-900 ">${item.price} $</div>
-                            <button class="h-[40px] w-[110px] bg-black text-amber-50 rounded-xl text-[20px] flex justify-center items-center">Add to <i class="bi bi-bag-dash text-2xl"></i></button>
+                            <div class="flex gap-[5px] " > 
+                                <input type="number" id="quantity" name="quantity" min="1" max="${item.stock}" class="w-[40px] h-[40px] bg-blue-100 rounded-[10px] border border-solid border-blue-900" value="1">
+                                <button class="h-[40px] w-[110px] bg-black text-amber-50 rounded-xl text-[20px] flex justify-center items-center hover:bg-blue-500 hover:text-amber-50" data-id="${item.id}">Add to <i class="bi bi-bag-dash text-2xl"></i></button>
+                            </div>
                         </div>
 
                         <div class="h-[0%]"></div>
@@ -108,14 +112,18 @@ let filterPrix = document.getElementById("filterPrix");
 
 function PriceFilter(products) {
     sortrPrix.addEventListener('change', () => {
-        if (sortrPrix.value == "Default") creat_cartes(products);
-        if (sortrPrix.value == "price:low to high") {
+        if (sortrPrix.value == "Default") {
+            cartContainer.innerHTML = "";
+            creat_cartes(products);
+        }
+
+        if (sortrPrix.value == "Price:low to high") {
             cartContainer.innerHTML = "";
             let tab = products.sort((a, b) => a.price - b.price);
             creat_cartes(tab);
 
         }
-        if (sortrPrix.value == "price:high to low") {
+        if (sortrPrix.value == "Price:high to low") {
             cartContainer.innerHTML = "";
             let tab = products.sort((a, b) => b.price - a.price);
             creat_cartes(tab);
@@ -209,6 +217,7 @@ async function choseByCategorie(products) {
         const btn = event.target;
 
         if (btn.tagName == "BUTTON") {
+            console.log(btn.dataset.id)
             if (btn.dataset.id != "AllProducts") {
                 console.log(btn.dataset.id);
 
@@ -272,6 +281,7 @@ console.log(buttonSearch);
 
 async function search_input(products) {
     buttonSearch.addEventListener('click', async () => {
+
         if (searchinput.value.trim().length == 0) {
             console.log(searchinput.value.trim().length);
             cartContainer.innerHTML = "";
@@ -298,10 +308,10 @@ async function search_input(products) {
 
 const toggleSwitch = document.getElementById('switch-component-blue');
 async function filterParStock() {
-    toggleSwitch.addEventListener('change',async (e)=> {
+    toggleSwitch.addEventListener('change', async (e) => {
         const isChecked = e.target.checked;
         console.log(isChecked);
-        if(isChecked){
+        if (isChecked) {
             const data = await fetch(apiProducts + `?inStock=true`);
             if (!data.ok) {
                 const probleme = await data.json();
@@ -312,8 +322,8 @@ async function filterParStock() {
             cartContainer.innerHTML = "";
             creat_cartes(product);
         }
-        else{
-           const data = await fetch(apiProducts + `?inStock=false`);
+        else {
+            const data = await fetch(apiProducts + `?inStock=false`);
             if (!data.ok) {
                 const probleme = await data.json();
                 console.log(probleme.message);
@@ -321,7 +331,7 @@ async function filterParStock() {
             const product = await data.json();
             console.log(product)
             cartContainer.innerHTML = "";
-            creat_cartes(product); 
+            creat_cartes(product);
         }
 
 
@@ -331,5 +341,50 @@ async function filterParStock() {
 filterParStock()
 
 
+
+
+
+
+
+// let a={a:1,b:2,c:2,d:4,e:55};
+// localStorage.setItem('a' , JSON.stringify(a));
+
+
+
+
+
+// const tab=JSON.parse(localStorage.getItem('a'));
+// console.log(tab);
+
+
+let cartesButton = document.getElementById("cartesButton");
+
+let header = document.querySelector("header");
+let main = document.querySelector("main");
+let modal_carts_container = document.getElementById("modal-carts-container");
+
+
+
+cartesButton.addEventListener('click', () => {
+
+    header.classList.add("blur-3xl")
+
+    main.classList.add("blur-3xl")
+
+    modal_carts_container.classList.remove("invisible");
+
+})
+
+
+let exitButton = document.getElementById("exitButton");
+
+exitButton.addEventListener('click', () => {
+
+    header.classList.remove("blur-3xl")
+
+    main.classList.remove("blur-3xl")
+
+    modal_carts_container.classList.add("invisible");
+})
 
 
