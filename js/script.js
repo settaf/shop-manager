@@ -479,3 +479,28 @@ function creat_cartes_module(tab) {
     })
 }
 
+
+
+
+let validerLePanier = document.getElementById("validerLePanier")
+let form =document.getElementById("form")
+let exitButtonForm = document.getElementById("exitButtonForm")
+
+
+validerLePanier.addEventListener('click',()=>{
+    form.classList.remove("hidden")
+    header.classList.add("blur-3xl")
+    main.classList.add("blur-3xl")
+    modal_carts_container.classList.add("invisible");
+
+
+})
+
+
+exitButtonForm.addEventListener('click',(e)=>{
+    e.preventDefault();
+    form.classList.add("hidden");
+    modal_carts_container.classList.remove("invisible");
+})
+
+
