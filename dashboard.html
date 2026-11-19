@@ -18,6 +18,10 @@
 
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css" />
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css" />
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.21.1/axios.js"></script>
+
 </head>
 
 
@@ -27,7 +31,7 @@
 
 
 
-<body>
+<body class="relative " id="body"> 
     <header class="flex items-center justify-center bg-blue-700">
         <section class="grid grid-cols-[1fr_4fr_1fr] h-[110px]  items-center  w-[95%]">
             <div class="flex h-[60%] justify-center gap-[10px]">
@@ -39,15 +43,17 @@
             </div>
             <div class="h-[60%] bg-amber-50 grid grid-cols-[1fr_15fr_4fr] place-items-center rounded-xl">
                 <div><i class="ph ph-magnifying-glass"></i></div>
-                <input type="text" class="w-[100%]" placeholder="search for something extraordinary...." id="searchInput">
-                <button class="text-amber-50 h-[80%] w-[90%] bg-amber-700 rounded-xl text-2xl" id="buttonSearch">Search</button>
+                <input type="text" class="w-[100%] h-[50px]" placeholder="search for something extraordinary...."
+                    id="searchInput">
+                <button class="text-amber-50 h-[80%] w-[90%] bg-amber-700 rounded-xl text-2xl hover:bg-amber-900"
+                    id="buttonSearch">Search</button>
             </div>
             <div class="flex h-[60%] gap-[30px]">
                 <button
-                    class="text-amber-50  flex justify-center items-center bg-purple-500 backdrop-blur  h-[100%] w-[25%] rounded-xl  border border-solid border-blue-900 "><i
+                    class="text-amber-50  flex justify-center items-center bg-purple-500 backdrop-blur  h-[100%] w-[25%] rounded-xl  border border-solid border-blue-900 hover:bg-pink-500"><i
                         class="ph ph-heart text-3xl"></i></button>
-                <div
-                    class="flex  items-center justify-around text-amber-50   bg-purple-500 backdrop-blur  h-[100%] w-[60%] rounded-xl  border border-solid border-blue-900">
+                <div class="flex  items-center justify-around text-amber-50   bg-purple-500 backdrop-blur  h-[100%] w-[60%] rounded-xl  border border-solid border-blue-900 hover:bg-gray-600"
+                    id="cartesButton">
                     <div class="text-amber-50"><i class="bi bi-bag-dash text-2xl"></i></div>
                     <div class="text-amber-50 text-3xl">Cart</div>
                     <div
@@ -57,7 +63,7 @@
             </div>
         </section>
     </header>
-    <main class="flex items-center justify-center bg-gray-100">
+    <main class="flex items-center justify-center bg-gray-100 ">
         <section class="w-[95%]">
             <div>
                 <div>
@@ -88,8 +94,8 @@
                 class="grid grid-cols-[4fr_2fr] w-[100%] h-[80px] bg-amber-50  rounded-xl transition-shadow drop-shadow-blue-900 shadow-xl">
                 <div class="flex gap-[20px] items-center" id="catigoriesContainer">
                     <div class="w-[0%]"></div>
-                    <button class="text-amber-50 text-xl bg-blue-500 h-[60%] rounded-xl border border-blue-900 p-2" data-id= "AllProducts"><i
-                            class="ph ph-squares-four" ></i>All products</button>
+                    <button class="text-amber-50 text-xl bg-blue-500 h-[60%] rounded-xl border border-blue-900 p-2"
+                        data-id="AllProducts"><i class="ph ph-squares-four"></i>All products</button>
                     <!-- <button class=" text-xl h-[60%] rounded-xl p-2">Audio</button> -->
                 </div>
                 <div class="flex items-center gap-[20px]">
@@ -174,7 +180,52 @@
 
             </div>
         </section>
+        
+
+
     </main>
+
+    <div class="w-[50%] h-full invisible absolute bg-gray-100 mr-auto top-0 right-0 " id="modal-carts-container">
+            <div class="flex h-[150px] bg-amber-50 w-[100%] items-center justify-around">
+                <div class="flex gap-[20px] w-[60%]">
+                    <div class="h-[100px] w-[100px] bg-gray-100 flex justify-center items-center rounded-xl border border-solid border-blue-100"><i class="bi bi-bag-dash text-5xl text-blue-500"></i></div>
+                    <div>
+                        <h1 class="text-3xl font-black">My Cart</h1>
+                        <br>
+                        <p class="text-blue-500"> 3 items on your cart</p>
+                    </div>
+                </div>
+                <button> <i class="ph ph-x text-5xl" id="exitButton"></i></button>
+            </div>
+            <div id="modalsCartsContainer"> <div class="w-[100%] h-[100px] flex justify-center items-center text-4xl text-red-300">le panier est vide </div> </div>
+
+            <div class="w-[100%] rounded-2xl bg-amber-50 border border-solid border-blue-500 p-4 shadow space-y-6">
+                <div class="flex justify-around w-[100%] h-[100px]">
+                    <h1 class="text-blue-900 text-5xl font-black" id="totalPrixProduits"></h1>
+                    <strong class="text-xl font-black">Total in $</strong>
+                </div>
+                <div class="w-[100%] h-[50px] flex justify-around">
+                    <button class="w-[40%] bg-red-500  rounded-xl text-amber-50"  id="supprimerLePanier">supprimer le panier</button>
+                    <button class="w-[40%] bg-blue-500 rounded-xl text-amber-50" id="validerLePanier">valider</button>
+                </div>
+            </div>
+    </div>
+
+
+    <!-- <div class="flex items-center justify-around">
+        <div class="flex items-center gap-[15px] w-[60%]">
+            <div class=" h-[150px] w-[150px] bg-gray-100 rounded-xl"> <img class="w-[100%] h-[100%] rounded-xl" src="" alt=""></i></div>
+            <div >
+                <h1 class="text-xl font-bold">huiop</h1>
+                <br>
+                <p class="text-blue-500"> yguipjo</p>
+            </div>
+        </div>
+        <button class="h-[50px] w-[50px] flex justify-center items-center bg-red-500 rounded-xl"><i class="ph ph-trash"></i></button>
+    </div> -->
+
+
+
     <script src="js/script.js"></script>
 </body>
 
