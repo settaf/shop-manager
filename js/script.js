@@ -344,8 +344,6 @@ filterParStock()
 
 
 
-
-
 // let a={a:1,b:2,c:2,d:4,e:55};
 // localStorage.setItem('a' , JSON.stringify(a));
 
@@ -387,4 +385,97 @@ exitButton.addEventListener('click', () => {
     modal_carts_container.classList.add("invisible");
 })
 
+
+
+function totalPrix(tab){
+    let total=0;
+    tab.forEach((item)=>{
+        let mult =item.acc * item.prix;
+        total+=mult
+    })
+    return total;
+}
+
+let modalsCartsContainer = document.getElementById("modalsCartsContainer");
+let tabCarts = [];
+let obj = {
+    id: "",
+    name: "",
+    desc: "",
+    prix: "",
+    img: "",
+    acc: 1
+}
+
+cartContainer.addEventListener('click', async (e) => {
+
+    const buttonClicke = e.target;
+    const idbutton = buttonClicke.dataset.id;
+    let input= buttonClicke.previousElementSibling;
+
+    console.log(idbutton);
+    const produi = await fetch(apiProducts + "/" + `${idbutton}`);
+    if (!produi.ok) {
+        const problem = await produi.json();
+        console.log(problem.message);
+        return;
+    }
+    const product = await produi.json();
+    console.log(product.id);
+
+
+
+    obj = {
+        id: product.id,
+        name: product.name,
+        desc: product.description,
+        prix: product.price,
+        img: product.image,
+        acc: Number(input.value)
+    }
+
+    
+    let index = tabCarts.findIndex(item => item.id == product.id)
+    if (index == -1) {
+        tabCarts.push(obj);
+        modalsCartsContainer.innerHTML = "";
+        creat_cartes_module(tabCarts)
+        let total =totalPrix(tabCarts);
+        
+        let totalPrixProduits = document.getElementById("totalPrixProduits");
+        
+        totalPrixProduits.textContent=`${total}`
+    } else {
+        tabCarts[index].acc += Number(input.value);
+        modalsCartsContainer.innerHTML = "";
+        creat_cartes_module(tabCarts);
+        const total = totalPrix(tabCarts);
+        console.log(total)
+        let totalPrixProduits = document.getElementById("totalPrixProduits");
+        console.log(totalPrixProduits);
+        totalPrixProduits.textContent=`${total}`
+    }
+
+})
+
+
+
+function creat_cartes_module(tab) {
+     
+    tab.forEach(item => {
+        modalsCartsContainer.innerHTML += `<div class="flex items-center justify-around">
+                                                <div class="flex items-center gap-[15px] w-[60%]">
+                                                    <div class=" h-[150px] w-[150px] bg-gray-100 rounded-xl"> <img class="w-[100%] h-[100%] rounded-xl" src="http://localhost:3000/${item.img}" alt=""></i></div>
+                                                    <div >
+                                                        <h1 class="text-xl font-bold">${item.name}</h1>
+                                                        <br>
+                                                        <p class="text-blue-500"> ${item.prix}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="w-[50px] h-[50px] flex justify-center items-center bg-blue-500 rounded-2xl">${item.acc}</div>
+                                                <button class="h-[50px] w-[50px] flex justify-center items-center bg-red-500 rounded-xl"><i class="ph ph-trash"></i> </button>
+                                            </div>
+                                        `
+    })
+}
 
